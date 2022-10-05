@@ -3,11 +3,11 @@ package {entityPath}
 import (
 	"context"
 	"github.com/gogf/gf/v2/errors/gerror"
+	"github.com/hong0220/FastGo/internal/api"
 	"github.com/hong0220/FastGo/internal/dao"
 	"github.com/hong0220/FastGo/internal/model/entity"
 	"github.com/hong0220/FastGo/internal/service"
 	"github.com/hong0220/FastGo/pkg/common/base"
-	"github.com/hong0220/FastGo/internal/api"
 )
 
 type s{entityName} struct{}
