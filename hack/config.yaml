@@ -1,0 +1,10 @@
+# GoFrame CLI tool configuration.
+gfcli:
+  gen:
+    dao:
+      - link: "mysql:root:rootroot@tcp(127.0.0.1:3306)/FastGo"
+        tables: "user"
+        # 表前缀
+        removePrefix: ""
+        descriptionTag: true
+        noModelComment: true

@@ -1,0 +1,86 @@
+package controller
+
+import (
+	"context"
+	"github.com/hong0220/FastGo/internal/api"
+	"github.com/hong0220/FastGo/internal/model/entity"
+	"github.com/hong0220/FastGo/internal/service"
+)
+
+type {entityName} struct{}
+
+// 包装对外暴露对象
+var c{entityName} {entityName}
+
+// Creat 创建记录
+func (c {entityName}) Creat(ctx context.Context, req *api.{entityName}CreatReq) (res *api.{entityName}CreatRes, err error) {
+	err = service.{entityName}().Creat(ctx, req)
+	if err != nil {
+		return nil, err
+	}
+	res = &api.{entityName}CreatRes{
+		IsSuccess: true,
+	}
+	return
+}
+
+// Delete 根据id删除单条记录
+func (c {entityName}) Delete(ctx context.Context, req *api.{entityName}DeleteReq) (res *api.{entityName}DeleteRes, err error) {
+	err = service.{entityName}().Delete(ctx, req.Id)
+	if err != nil {
+		return nil, err
+	}
+	res = &api.{entityName}DeleteRes{
+		IsSuccess: true,
+	}
+	return
+}
+
+// DeleteByIds 根据id数组批量删除记录
+func (c {entityName}) DeleteByIds(ctx context.Context, req *api.{entityName}DeleteByIdsReq) (res *api.{entityName}DeleteByIdsRes, err error) {
+	err = service.{entityName}().DeleteByIds(ctx, req.Ids)
+	if err != nil {
+		return nil, err
+	}
+	res = &api.{entityName}DeleteByIdsRes{
+		IsSuccess: true,
+	}
+	return
+}
+
+// Update 修改记录
+func (c {entityName}) Update(ctx context.Context, req *api.{entityName}UpdateReq) (res *api.{entityName}UpdateRes, err error) {
+	err = service.{entityName}().Update(ctx, req)
+	if err != nil {
+		return nil, err
+	}
+	res = &api.{entityName}UpdateRes{
+		IsSuccess: true,
+	}
+	return
+}
+
+// GetId 根据id查询记录
+func (c {entityName}) GetId(ctx context.Context, req *api.{entityName}IdReq) (res *api.{entityName}IdRes, err error) {
+	var instance *entity.{entityName}
+	instance, err = service.{entityName}().GetId(ctx, req.Id)
+	if err != nil {
+		return nil, err
+	}
+	res = &api.{entityName}IdRes{
+		Instance: instance,
+	}
+	return
+}
+
+// GetList 分页查询
+func (c {entityName}) GetList(ctx context.Context, req *api.{entityName}ListReq) (res *api.{entityName}ListRes, err error) {
+	list, err := service.{entityName}().GetList(ctx, req.Page)
+	if err != nil {
+		return nil, err
+	}
+	res = &api.{entityName}ListRes{
+		List: list,
+	}
+	return
+}
