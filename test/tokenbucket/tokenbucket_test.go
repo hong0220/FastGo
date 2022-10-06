@@ -8,7 +8,7 @@ package tokenbucket
 //	"time"
 //)
 //
-//func Test_TokenBucket(t *testing.T) {
+//func TestTokenBucket(t *testing.T) {
 //	bucket := tokenbucket.NewBucket(5, time.Second)
 //	for i := 0; i < 1000; i++ {
 //		time.Sleep(time.Millisecond * 100)

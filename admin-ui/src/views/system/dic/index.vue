@@ -16,6 +16,7 @@
           新增字典
         </el-button>
       </div>
+
       <el-table :data="tableData.data" style="width: 100%">
         <el-table-column type="index" label="序号" width="50"/>
         <el-table-column prop="dicName" label="字典名称" show-overflow-tooltip></el-table-column>
@@ -35,6 +36,7 @@
           </template>
         </el-table-column>
       </el-table>
+
       <el-pagination
           @size-change="onHandleSizeChange"
           @current-change="onHandleCurrentChange"
@@ -49,6 +51,7 @@
       >
       </el-pagination>
     </el-card>
+
     <AddDic ref="addDicRef"/>
     <EditDic ref="editDicRef"/>
   </div>

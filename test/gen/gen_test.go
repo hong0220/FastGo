@@ -9,7 +9,7 @@ import (
 	"testing"
 )
 
-func Test_Gen_Api(t *testing.T) {
+func TestGenApi(t *testing.T) {
 	gtest.C(t, func(t *gtest.T) {
 		inFilePath := base.GetProjectPath() + "/manifest/gen/api.txt"
 		data, err := ioutil.ReadFile(inFilePath)
@@ -30,7 +30,7 @@ func Test_Gen_Api(t *testing.T) {
 	})
 }
 
-func Test_Gen_Logic(t *testing.T) {
+func TestGenLogic(t *testing.T) {
 	gtest.C(t, func(t *gtest.T) {
 		inFilePath := base.GetProjectPath() + "/manifest/gen/logic.txt"
 		data, err := ioutil.ReadFile(inFilePath)
@@ -51,7 +51,7 @@ func Test_Gen_Logic(t *testing.T) {
 	})
 }
 
-func Test_Gen_Controller(t *testing.T) {
+func TestGenController(t *testing.T) {
 	gtest.C(t, func(t *gtest.T) {
 		inFilePath := base.GetProjectPath() + "/manifest/gen/controller.txt"
 		data, err := ioutil.ReadFile(inFilePath)

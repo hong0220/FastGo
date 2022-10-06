@@ -12,7 +12,7 @@ package timewheel
 //var fiveSecond int64 = 5
 //var twoSecond int64 = 2
 //
-//func Test_TimeWheel(t *testing.T) {
+//func TestTimeWheel(t *testing.T) {
 //	jobContext := timewheel.JobContext{}
 //	// 初始化一个时间间隔是1s，一共有60个齿轮的时间轮，默认时间轮转动一圈的时间是60s
 //	timeWheel := timewheel.CreateTimeWheel(1*time.Second, 60, TimeWheelDefaultJob)
