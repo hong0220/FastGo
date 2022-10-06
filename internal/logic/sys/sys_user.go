@@ -1,4 +1,4 @@
-package sysuser
+package logic
 
 import (
 	"context"
@@ -13,11 +13,11 @@ import (
 type sSysUser struct{}
 
 func init() {
-	service.RegisterSysUser(New())
+	service.RegisterSysUser(NewSysUser())
 }
 
 // 包装对外暴露对象
-func New() *sSysUser {
+func NewSysUser() *sSysUser {
 	return &sSysUser{}
 }
 

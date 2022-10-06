@@ -1,4 +1,4 @@
-package sysdict
+package logic
 
 import (
 	"context"
@@ -13,11 +13,11 @@ import (
 type sSysDict struct{}
 
 func init() {
-	service.RegisterSysDict(New())
+	service.RegisterSysDict(NewSysDict())
 }
 
 // 包装对外暴露对象
-func New() *sSysDict {
+func NewSysDict() *sSysDict {
 	return &sSysDict{}
 }
 

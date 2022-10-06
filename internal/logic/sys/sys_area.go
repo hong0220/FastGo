@@ -1,4 +1,4 @@
-package sysarea
+package logic
 
 import (
 	"context"
@@ -13,11 +13,11 @@ import (
 type sSysArea struct{}
 
 func init() {
-	service.RegisterSysArea(New())
+	service.RegisterSysArea(NewSysArea())
 }
 
 // 包装对外暴露对象
-func New() *sSysArea {
+func NewSysArea() *sSysArea {
 	return &sSysArea{}
 }
 

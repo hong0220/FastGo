@@ -1,4 +1,4 @@
-package syslog
+package logic
 
 import (
 	"context"
@@ -13,11 +13,11 @@ import (
 type sSysLog struct{}
 
 func init() {
-	service.RegisterSysLog(New())
+	service.RegisterSysLog(NewSysLog())
 }
 
 // 包装对外暴露对象
-func New() *sSysLog {
+func NewSysLog() *sSysLog {
 	return &sSysLog{}
 }
 

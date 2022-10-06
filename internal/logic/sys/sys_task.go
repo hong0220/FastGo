@@ -1,4 +1,4 @@
-package systask
+package logic
 
 import (
 	"context"
@@ -13,11 +13,11 @@ import (
 type sSysTask struct{}
 
 func init() {
-	service.RegisterSysTask(New())
+	service.RegisterSysTask(NewSysTask())
 }
 
 // 包装对外暴露对象
-func New() *sSysTask {
+func NewSysTask() *sSysTask {
 	return &sSysTask{}
 }
 

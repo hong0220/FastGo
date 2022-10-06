@@ -1,6 +1,10 @@
 package base
 
 import (
+	_ "github.com/gogf/gf/contrib/drivers/mysql/v2"
+
+	"github.com/gogf/gf/v2/frame/g"
+	"github.com/gogf/gf/v2/os/gcfg"
 	"os"
 	"strings"
 )
@@ -10,4 +14,9 @@ func GetProjectPath() string {
 	path, _ := os.Getwd()
 	path = path[0 : strings.Index(path, projectName)+len(projectName)]
 	return path
+}
+
+func ApiConfigSetUp() {
+	path := GetProjectPath() + "/manifest/config/config.local.yaml"
+	g.Cfg().GetAdapter().(*gcfg.AdapterFile).SetFileName(path)
 }

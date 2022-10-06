@@ -1,4 +1,4 @@
-package sysuserrole
+package logic
 
 import (
 	"context"
@@ -13,11 +13,11 @@ import (
 type sSysUserRole struct{}
 
 func init() {
-	service.RegisterSysUserRole(New())
+	service.RegisterSysUserRole(NewSysUserRole())
 }
 
 // 包装对外暴露对象
-func New() *sSysUserRole {
+func NewSysUserRole() *sSysUserRole {
 	return &sSysUserRole{}
 }
 

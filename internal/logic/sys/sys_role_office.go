@@ -1,4 +1,4 @@
-package sysroleoffice
+package logic
 
 import (
 	"context"
@@ -13,11 +13,11 @@ import (
 type sSysRoleOffice struct{}
 
 func init() {
-	service.RegisterSysRoleOffice(New())
+	service.RegisterSysRoleOffice(NewSysRoleOffice())
 }
 
 // 包装对外暴露对象
-func New() *sSysRoleOffice {
+func NewSysRoleOffice() *sSysRoleOffice {
 	return &sSysRoleOffice{}
 }
 

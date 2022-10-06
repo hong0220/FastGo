@@ -1,4 +1,4 @@
-package sysresource
+package logic
 
 import (
 	"context"
@@ -13,11 +13,11 @@ import (
 type sSysResource struct{}
 
 func init() {
-	service.RegisterSysResource(New())
+	service.RegisterSysResource(NewSysResource())
 }
 
 // 包装对外暴露对象
-func New() *sSysResource {
+func NewSysResource() *sSysResource {
 	return &sSysResource{}
 }
 

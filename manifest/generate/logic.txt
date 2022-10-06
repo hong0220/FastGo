@@ -1,4 +1,4 @@
-package {entityPath}
+package logic
 
 import (
 	"context"
@@ -13,11 +13,11 @@ import (
 type s{entityName} struct{}
 
 func init() {
-	service.Register{entityName}(New())
+	service.Register{entityName}(New{entityName}())
 }
 
 // 包装对外暴露对象
-func New() *s{entityName} {
+func New{entityName}() *s{entityName} {
 	return &s{entityName}{}
 }
 

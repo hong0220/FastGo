@@ -1,4 +1,4 @@
-package sysoffice
+package logic
 
 import (
 	"context"
@@ -13,11 +13,11 @@ import (
 type sSysOffice struct{}
 
 func init() {
-	service.RegisterSysOffice(New())
+	service.RegisterSysOffice(NewSysOffice())
 }
 
 // 包装对外暴露对象
-func New() *sSysOffice {
+func NewSysOffice() *sSysOffice {
 	return &sSysOffice{}
 }
 
