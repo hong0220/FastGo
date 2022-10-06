@@ -1,4 +1,4 @@
-package gen
+package generate
 
 import (
 	"fmt"
@@ -11,7 +11,7 @@ import (
 
 func TestGenApi(t *testing.T) {
 	gtest.C(t, func(t *gtest.T) {
-		inFilePath := base.GetProjectPath() + "/manifest/gen/api.txt"
+		inFilePath := base.GetProjectPath() + "/manifest/generate/api.txt"
 		data, err := ioutil.ReadFile(inFilePath)
 		if err != nil {
 			fmt.Println(err)
@@ -32,7 +32,7 @@ func TestGenApi(t *testing.T) {
 
 func TestGenLogic(t *testing.T) {
 	gtest.C(t, func(t *gtest.T) {
-		inFilePath := base.GetProjectPath() + "/manifest/gen/logic.txt"
+		inFilePath := base.GetProjectPath() + "/manifest/generate/logic.txt"
 		data, err := ioutil.ReadFile(inFilePath)
 		if err != nil {
 			fmt.Println(err)
@@ -53,7 +53,7 @@ func TestGenLogic(t *testing.T) {
 
 func TestGenController(t *testing.T) {
 	gtest.C(t, func(t *gtest.T) {
-		inFilePath := base.GetProjectPath() + "/manifest/gen/controller.txt"
+		inFilePath := base.GetProjectPath() + "/manifest/generate/controller.txt"
 		data, err := ioutil.ReadFile(inFilePath)
 		if err != nil {
 			fmt.Println(err)

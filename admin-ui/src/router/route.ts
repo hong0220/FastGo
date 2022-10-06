@@ -140,6 +140,39 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
                 ],
             },
             {
+                path: '/middleware',
+                name: 'middleware',
+                component: () => import('/@/layout/routerView/parent.vue'),
+                redirect: '/system/menu',
+                meta: {
+                    title: 'message.router.middleware',
+                    isLink: '',
+                    isHide: false,
+                    isKeepAlive: true,
+                    isAffix: false,
+                    isIframe: false,
+                    roles: ['admin', 'common'],
+                    icon: 'iconfont icon-xitongshezhi',
+                },
+                children: [
+                    {
+                        path: '/middleware/metric',
+                        name: 'middlewareMetric',
+                        component: () => import('/@/views/middleware/metric/index.vue'),
+                        meta: {
+                            title: 'message.router.middlewareMetric',
+                            isLink: '',
+                            isHide: false,
+                            isKeepAlive: true,
+                            isAffix: false,
+                            isIframe: false,
+                            roles: ['admin', 'common'],
+                            icon: 'iconfont icon-caidan',
+                        },
+                    }
+                ],
+            },
+            {
                 path: '/limits',
                 name: 'limits',
                 component: () => import('/@/layout/routerView/parent.vue'),

@@ -37,6 +37,6 @@ func recordUptime() {
 // https://blog.csdn.net/a1510841693/article/details/124102654
 func Init() {
 	server := http.NewServeMux()
-	server.Handle("/metrics", promhttp.Handler())
+	server.Handle("/metric", promhttp.Handler())
 	http.ListenAndServe(":9090", server)
 }

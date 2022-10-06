@@ -18,7 +18,7 @@ go get -u github.com/hong0220/FastGo@v0.0.1
 1.重新安装 go，再 gf install
 2.gf gen dao -c ./hack/config.yarm -path ./internal
 3.gf gen service
-4.go test gen_test.go
+4.go test generate_test.go
 ```
 
 ## 项目启动
