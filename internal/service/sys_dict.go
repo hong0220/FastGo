@@ -13,24 +13,24 @@ import (
 	"github.com/hong0220/FastGo/pkg/common/base"
 )
 
-type IUser interface {
-	Creat(ctx context.Context, req *api.UserCreatReq) (err error)
+type ISysDict interface {
+	Creat(ctx context.Context, req *api.SysDictCreatReq) (err error)
 	Delete(ctx context.Context, id int) (err error)
 	DeleteByIds(ctx context.Context, ids []int) (err error)
-	Update(ctx context.Context, req *api.UserUpdateReq) (err error)
-	GetId(ctx context.Context, id int) (res *entity.User, err error)
-	GetList(ctx context.Context, page *base.Page) (res []*entity.User, err error)
+	Update(ctx context.Context, req *api.SysDictUpdateReq) (err error)
+	GetId(ctx context.Context, id int) (res *entity.SysDict, err error)
+	GetList(ctx context.Context, page *base.Page) (res []*entity.SysDict, err error)
 }
 
-var localUser IUser
+var localSysDict ISysDict
 
-func User() IUser {
-	if localUser == nil {
-		panic("implement not found for interface IUser, forgot register?")
+func SysDict() ISysDict {
+	if localSysDict == nil {
+		panic("implement not found for interface ISysDict, forgot register?")
 	}
-	return localUser
+	return localSysDict
 }
 
-func RegisterUser(i IUser) {
-	localUser = i
+func RegisterSysDict(i ISysDict) {
+	localSysDict = i
 }

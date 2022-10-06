@@ -3,7 +3,7 @@ gfcli:
   gen:
     dao:
       - link: "mysql:root:rootroot@tcp(127.0.0.1:3306)/FastGo"
-        tables: "user"
+        tables: "sys_dict"
         # 表前缀
         removePrefix: ""
         descriptionTag: true

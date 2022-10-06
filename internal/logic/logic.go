@@ -5,5 +5,5 @@
 package logic
 
 import (
-	_ "github.com/hong0220/FastGo/internal/logic/user"
+	_ "github.com/hong0220/FastGo/internal/logic/sys"
 )

@@ -18,11 +18,11 @@ func Test_Gen_Api(t *testing.T) {
 		}
 		//fmt.Print(string(data))
 
-		content := strings.Replace(string(data), "{entityName}", "User", -1)
-		content = strings.Replace(content, "{entityPath}", "user", -1)
+		content := strings.Replace(string(data), "{entityName}", "SysDict", -1)
+		content = strings.Replace(content, "{entityPath}", "sysDict", -1)
 		fmt.Print(content)
 
-		outFilePath := base.GetProjectPath() + "/internal/api/user.go"
+		outFilePath := base.GetProjectPath() + "/internal/api/sys_dict.go"
 		err = ioutil.WriteFile(outFilePath, []byte(content), 0777)
 		if err != nil {
 			fmt.Println(err)
@@ -39,11 +39,11 @@ func Test_Gen_Logic(t *testing.T) {
 		}
 		//fmt.Print(string(data))
 
-		content := strings.Replace(string(data), "{entityName}", "User", -1)
-		content = strings.Replace(content, "{entityPath}", "user", -1)
+		content := strings.Replace(string(data), "{entityName}", "SysDict", -1)
+		content = strings.Replace(content, "{entityPath}", "sysDict", -1)
 		fmt.Print(content)
 
-		outFilePath := base.GetProjectPath() + "/internal/logic/user/user.go"
+		outFilePath := base.GetProjectPath() + "/internal/logic/sys/sys_dict.go"
 		err = ioutil.WriteFile(outFilePath, []byte(content), 0777)
 		if err != nil {
 			fmt.Println(err)
@@ -60,10 +60,10 @@ func Test_Gen_Controller(t *testing.T) {
 		}
 		//fmt.Print(string(data))
 
-		content := strings.Replace(string(data), "{entityName}", "User", -1)
+		content := strings.Replace(string(data), "{entityName}", "SysDict", -1)
 		fmt.Print(content)
 
-		outFilePath := base.GetProjectPath() + "/internal/controller/user.go"
+		outFilePath := base.GetProjectPath() + "/internal/controller/sys_dict.go"
 		err = ioutil.WriteFile(outFilePath, []byte(content), 0777)
 		if err != nil {
 			fmt.Println(err)

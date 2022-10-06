@@ -8,19 +8,19 @@ import (
 	"github.com/hong0220/FastGo/internal/dao/internal"
 )
 
-// internalUserDao is internal type for wrapping internal DAO implements.
-type internalUserDao = *internal.UserDao
+// internalSysDictDao is internal type for wrapping internal DAO implements.
+type internalSysDictDao = *internal.SysDictDao
 
-// userDao is the data access object for table user.
+// sysDictDao is the data access object for table sys_dict.
 // You can define custom methods on it to extend its functionality as you wish.
-type userDao struct {
-	internalUserDao
+type sysDictDao struct {
+	internalSysDictDao
 }
 
 var (
-	// User is globally public accessible object for table user operations.
-	User = userDao{
-		internal.NewUserDao(),
+	// SysDict is globally public accessible object for table sys_dict operations.
+	SysDict = sysDictDao{
+		internal.NewSysDictDao(),
 	}
 )
 

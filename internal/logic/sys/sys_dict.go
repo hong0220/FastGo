@@ -1,4 +1,4 @@
-package user
+package sysDict
 
 import (
 	"context"
@@ -10,20 +10,20 @@ import (
 	"github.com/hong0220/FastGo/pkg/common/base"
 )
 
-type sUser struct{}
+type sSysDict struct{}
 
 func init() {
-	service.RegisterUser(New())
+	service.RegisterSysDict(New())
 }
 
 // 包装对外暴露对象
-func New() *sUser {
-	return &sUser{}
+func New() *sSysDict {
+	return &sSysDict{}
 }
 
 // 创建记录
-func (s sUser) Creat(ctx context.Context, req *api.UserCreatReq) (err error) {
-	res1, err1 := dao.User.Ctx(ctx).Data(req).InsertIgnore()
+func (s sSysDict) Creat(ctx context.Context, req *api.SysDictCreatReq) (err error) {
+	res1, err1 := dao.SysDict.Ctx(ctx).Data(req).InsertIgnore()
 	if err1 != nil {
 		return err1
 	}
@@ -39,8 +39,8 @@ func (s sUser) Creat(ctx context.Context, req *api.UserCreatReq) (err error) {
 }
 
 // Delete 根据id删除单条记录
-func (s sUser) Delete(ctx context.Context, id int) (err error) {
-	res1, err1 := dao.User.Ctx(ctx).WhereIn(dao.User.Columns().Id, id).Delete()
+func (s sSysDict) Delete(ctx context.Context, id int) (err error) {
+	res1, err1 := dao.SysDict.Ctx(ctx).WhereIn(dao.SysDict.Columns().Id, id).Delete()
 	if err1 != nil {
 		return err1
 	}
@@ -56,8 +56,8 @@ func (s sUser) Delete(ctx context.Context, id int) (err error) {
 }
 
 // DeleteByIds 根据id数组批量删除记录
-func (s sUser) DeleteByIds(ctx context.Context, ids []int) (err error) {
-	res1, err1 := dao.User.Ctx(ctx).WhereIn(dao.User.Columns().Id, ids).Delete()
+func (s sSysDict) DeleteByIds(ctx context.Context, ids []int) (err error) {
+	res1, err1 := dao.SysDict.Ctx(ctx).WhereIn(dao.SysDict.Columns().Id, ids).Delete()
 	if err1 != nil {
 		return err1
 	}
@@ -73,8 +73,8 @@ func (s sUser) DeleteByIds(ctx context.Context, ids []int) (err error) {
 }
 
 // Update 修改记录
-func (s sUser) Update(ctx context.Context, req *api.UserUpdateReq) (err error) {
-	res1, err1 := dao.User.Ctx(ctx).Data(req).Where(dao.User.Columns().Id, req.Form.Id).Update()
+func (s sSysDict) Update(ctx context.Context, req *api.SysDictUpdateReq) (err error) {
+	res1, err1 := dao.SysDict.Ctx(ctx).Data(req).Where(dao.SysDict.Columns().Id, req.Form.Id).Update()
 	if err1 != nil {
 		return err1
 	}
@@ -90,9 +90,9 @@ func (s sUser) Update(ctx context.Context, req *api.UserUpdateReq) (err error) {
 }
 
 // GetId 根据id查询记录
-func (s sUser) GetId(ctx context.Context, id int) (res *entity.User, err error) {
-	var one *entity.User
-	err = dao.User.Ctx(ctx).Where(dao.User.Columns().Id, id).Scan(&one)
+func (s sSysDict) GetId(ctx context.Context, id int) (res *entity.SysDict, err error) {
+	var one *entity.SysDict
+	err = dao.SysDict.Ctx(ctx).Where(dao.SysDict.Columns().Id, id).Scan(&one)
 	if err != nil {
 		return nil, err
 	}
@@ -101,11 +101,11 @@ func (s sUser) GetId(ctx context.Context, id int) (res *entity.User, err error) 
 }
 
 // GetList 分页查询
-func (s sUser) GetList(ctx context.Context, page *base.Page) (res []*entity.User, err error) {
-	var many []*entity.User
+func (s sSysDict) GetList(ctx context.Context, page *base.Page) (res []*entity.SysDict, err error) {
+	var many []*entity.SysDict
 	start := (page.PageNum - 1) * 10
 	limit := page.PageSize
-	err = dao.User.Ctx(ctx).Limit(start, limit).Scan(&many)
+	err = dao.SysDict.Ctx(ctx).Limit(start, limit).Scan(&many)
 	if err != nil {
 		return nil, err
 	}
