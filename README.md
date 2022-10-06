@@ -15,9 +15,16 @@ go get -u github.com/hong0220/FastGo@v0.0.1
 ## 代码生成
 
 ```
-重新安装go，再 gf install
-gf gen dao -c ./hack/config.yarm -path ./internal
-gf gen service
+1.重新安装 go，再 gf install
+2.gf gen dao -c ./hack/config.yarm -path ./internal
+3.gf gen service
+4.go test gen_test.go
+```
+
+## 项目启动
+
+```
+program arguments:--gf.gcfg.file=../../manifest/config/config.local.yaml
 ```
 
 
@@ -25,7 +32,6 @@ gf gen service
 功能集成
 变量枚举
 多表联合查询
-ci
 
 # TimeWheel
 TimeWheel 时间轮是实现延时队列的一种方式，可以优雅执行定时任务。

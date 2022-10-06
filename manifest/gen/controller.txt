@@ -10,7 +10,7 @@ import (
 type {entityName} struct{}
 
 // 包装对外暴露对象
-var c{entityName} {entityName}
+var C{entityName} {entityName}
 
 // Creat 创建记录
 func (c {entityName}) Creat(ctx context.Context, req *api.{entityName}CreatReq) (res *api.{entityName}CreatRes, err error) {

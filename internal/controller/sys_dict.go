@@ -10,7 +10,7 @@ import (
 type SysDict struct{}
 
 // 包装对外暴露对象
-var cSysDict SysDict
+var CSysDict SysDict
 
 // Creat 创建记录
 func (c SysDict) Creat(ctx context.Context, req *api.SysDictCreatReq) (res *api.SysDictCreatRes, err error) {

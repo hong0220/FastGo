@@ -1,0 +1,36 @@
+server:
+  name: "FastGo"
+  address: ":8080"
+  openapiPath: "/api.json"
+  swaggerPath: "/swagger"
+  # 日志配置
+  logPath: "/tmp/log"
+  # 是否禁用标准输出，只输出到文件
+  logStdout: false
+  accessLogEnabled: true
+  accessLogPattern: "access.{Ymd}.log"
+  errorStack: true
+  errorLogEnabled: true
+  errorLogPattern: "error.{Ymd}.log"
+
+logger:
+  level: "all"
+  # 是否禁用标准输出，只输出到文件
+  stdout: false
+  path: "/tmp/log"
+  file: "FastGo.log"
+  # 一天一个回滚
+  rotateExpire: 1d
+  # 保留7个日志文件
+  rotateBackupLimit: 7
+
+# Database.
+database:
+  logger:
+    level: "all"
+    stdout: true
+
+  default:
+    link: "mysql:root:rootroot@tcp(127.0.0.1:3306)/FastGo"
+    debug: true
+    charset: utf8mb4
