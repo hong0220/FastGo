@@ -1,4 +1,4 @@
-package sysdict
+package sysrole
 
 import (
 	"context"
@@ -10,20 +10,20 @@ import (
 	"github.com/hong0220/FastGo/pkg/common/base"
 )
 
-type sSysDict struct{}
+type sSysRole struct{}
 
 func init() {
-	service.RegisterSysDict(New())
+	service.RegisterSysRole(New())
 }
 
 // 包装对外暴露对象
-func New() *sSysDict {
-	return &sSysDict{}
+func New() *sSysRole {
+	return &sSysRole{}
 }
 
 // 创建记录
-func (s sSysDict) Creat(ctx context.Context, req *api.SysDictCreatReq) (err error) {
-	res1, err1 := dao.SysDict.Ctx(ctx).Data(req).InsertIgnore()
+func (s sSysRole) Creat(ctx context.Context, req *api.SysRoleCreatReq) (err error) {
+	res1, err1 := dao.SysRole.Ctx(ctx).Data(req).InsertIgnore()
 	if err1 != nil {
 		return err1
 	}
@@ -39,8 +39,8 @@ func (s sSysDict) Creat(ctx context.Context, req *api.SysDictCreatReq) (err erro
 }
 
 // Delete 根据id删除单条记录
-func (s sSysDict) Delete(ctx context.Context, id int) (err error) {
-	res1, err1 := dao.SysDict.Ctx(ctx).WhereIn(dao.SysDict.Columns().Id, id).Delete()
+func (s sSysRole) Delete(ctx context.Context, id int) (err error) {
+	res1, err1 := dao.SysRole.Ctx(ctx).WhereIn(dao.SysRole.Columns().Id, id).Delete()
 	if err1 != nil {
 		return err1
 	}
@@ -56,8 +56,8 @@ func (s sSysDict) Delete(ctx context.Context, id int) (err error) {
 }
 
 // DeleteByIds 根据id数组批量删除记录
-func (s sSysDict) DeleteByIds(ctx context.Context, ids []int) (err error) {
-	res1, err1 := dao.SysDict.Ctx(ctx).WhereIn(dao.SysDict.Columns().Id, ids).Delete()
+func (s sSysRole) DeleteByIds(ctx context.Context, ids []int) (err error) {
+	res1, err1 := dao.SysRole.Ctx(ctx).WhereIn(dao.SysRole.Columns().Id, ids).Delete()
 	if err1 != nil {
 		return err1
 	}
@@ -73,8 +73,8 @@ func (s sSysDict) DeleteByIds(ctx context.Context, ids []int) (err error) {
 }
 
 // Update 修改记录
-func (s sSysDict) Update(ctx context.Context, req *api.SysDictUpdateReq) (err error) {
-	res1, err1 := dao.SysDict.Ctx(ctx).Data(req).Where(dao.SysDict.Columns().Id, req.Form.Id).Update()
+func (s sSysRole) Update(ctx context.Context, req *api.SysRoleUpdateReq) (err error) {
+	res1, err1 := dao.SysRole.Ctx(ctx).Data(req).Where(dao.SysRole.Columns().Id, req.Form.Id).Update()
 	if err1 != nil {
 		return err1
 	}
@@ -90,9 +90,9 @@ func (s sSysDict) Update(ctx context.Context, req *api.SysDictUpdateReq) (err er
 }
 
 // GetId 根据id查询记录
-func (s sSysDict) GetId(ctx context.Context, id int) (res *entity.SysDict, err error) {
-	var one *entity.SysDict
-	err = dao.SysDict.Ctx(ctx).Where(dao.SysDict.Columns().Id, id).Scan(&one)
+func (s sSysRole) GetId(ctx context.Context, id int) (res *entity.SysRole, err error) {
+	var one *entity.SysRole
+	err = dao.SysRole.Ctx(ctx).Where(dao.SysRole.Columns().Id, id).Scan(&one)
 	if err != nil {
 		return nil, err
 	}
@@ -101,11 +101,11 @@ func (s sSysDict) GetId(ctx context.Context, id int) (res *entity.SysDict, err e
 }
 
 // GetList 分页查询
-func (s sSysDict) GetList(ctx context.Context, page *base.Page) (res []*entity.SysDict, err error) {
-	var many []*entity.SysDict
+func (s sSysRole) GetList(ctx context.Context, page *base.Page) (res []*entity.SysRole, err error) {
+	var many []*entity.SysRole
 	start := (page.PageNum - 1) * 10
 	limit := page.PageSize
-	err = dao.SysDict.Ctx(ctx).Limit(start, limit).Scan(&many)
+	err = dao.SysRole.Ctx(ctx).Limit(start, limit).Scan(&many)
 	if err != nil {
 		return nil, err
 	}

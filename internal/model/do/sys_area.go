@@ -9,18 +9,20 @@ import (
 	"github.com/gogf/gf/v2/os/gtime"
 )
 
-// SysDict is the golang structure of table sys_dict for DAO operations like Where/Data.
-type SysDict struct {
-	g.Meta     `orm:"table:sys_dict, do:true"`
+// SysArea is the golang structure of table sys_area for DAO operations like Where/Data.
+type SysArea struct {
+	g.Meta     `orm:"table:sys_area, do:true"`
 	Id         interface{} // 编号
-	Label      interface{} // 标签名
-	Value      interface{} // 数据值
-	Type       interface{} // 类型
-	Desc       interface{} // 描述
+	ParentId   interface{} // 父级编号
+	ParentIds  interface{} // 所有父级编号
+	Code       interface{} // 区域编码
+	Name       interface{} // 区域名称
+	Type       interface{} // 区域类型
 	CreateBy   interface{} // 创建者
 	CreateDate *gtime.Time // 创建时间
 	UpdateBy   interface{} // 更新者
 	UpdateDate *gtime.Time // 更新时间
-	Remark     interface{} // 备注
-	Status     interface{} // 状态,0:删除,1:有效
+	Remarks    interface{} // 备注信息
+	DelFlag    interface{} // 删除标记(0活null 正常 1,删除)
+	Icon       interface{} //
 }

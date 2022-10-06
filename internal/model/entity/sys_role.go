@@ -8,17 +8,16 @@ import (
 	"github.com/gogf/gf/v2/os/gtime"
 )
 
-// SysDict is the golang structure for table sys_dict.
-type SysDict struct {
+// SysRole is the golang structure for table sys_role.
+type SysRole struct {
 	Id         int64       `json:"id"         description:"编号"`
-	Label      string      `json:"label"      description:"标签名"`
-	Value      string      `json:"value"      description:"数据值"`
-	Type       string      `json:"type"       description:"类型"`
-	Desc       string      `json:"desc"       description:"描述"`
+	OfficeId   int64       `json:"officeId"   description:"归属机构"`
+	Name       string      `json:"name"       description:"角色名称"`
+	DataScope  string      `json:"dataScope"  description:"数据范围"`
 	CreateBy   string      `json:"createBy"   description:"创建者"`
 	CreateDate *gtime.Time `json:"createDate" description:"创建时间"`
 	UpdateBy   string      `json:"updateBy"   description:"更新者"`
 	UpdateDate *gtime.Time `json:"updateDate" description:"更新时间"`
-	Remark     string      `json:"remark"     description:"备注"`
-	Status     string      `json:"status"     description:"状态,0:删除,1:有效"`
+	Remarks    string      `json:"remarks"    description:"备注信息"`
+	DelFlag    string      `json:"delFlag"    description:"删除标记"`
 }
