@@ -1,6 +1,7 @@
 package main
 
 import (
+	// 注意这边
 	_ "github.com/gogf/gf/contrib/drivers/mysql/v2"
 
 	"context"
@@ -10,7 +11,7 @@ import (
 	"github.com/gogf/gf/v2/os/gctx"
 	"github.com/gogf/gf/v2/os/glog"
 	"github.com/gogf/gf/v2/text/gstr"
-	"github.com/hong0220/FastGo/internal/controller"
+	"github.com/hong0220/FastGo/internal/controller/sys"
 	"github.com/hong0220/FastGo/pkg/middleware/metric"
 	"time"
 )
@@ -54,7 +55,16 @@ func main() {
 					// 获取用户信息
 					//group.Middleware(middleware.MiddlewareHandlerAuthRequest)
 					group.Bind(
+						controller.CSysArea,
 						controller.CSysDict,
+						controller.CSysLog,
+						controller.CSysOffice,
+						controller.CSysResource,
+						controller.CSysRole,
+						controller.CSysRoleOffice,
+						controller.CSysTask,
+						controller.CSysUser,
+						controller.CSysUserRole,
 					)
 				})
 			})
