@@ -2,71 +2,85 @@ package generate
 
 import (
 	"fmt"
-	"github.com/gogf/gf/v2/test/gtest"
 	"github.com/hong0220/FastGo/pkg/common/base"
 	"io/ioutil"
 	"strings"
 	"testing"
 )
 
-func TestGenApi(t *testing.T) {
-	gtest.C(t, func(t *gtest.T) {
-		inFilePath := base.GetProjectPath() + "/manifest/generate/api.txt"
-		data, err := ioutil.ReadFile(inFilePath)
-		if err != nil {
-			fmt.Println(err)
+func TestGenerate(t *testing.T) {
+	array := []string{"sys_area", "sys_dict", "sys_log", "sys_office", "sys_resource", "sys_role", "sys_role_office", "sys_resource",
+		"sys_task", "sys_user", "sys_user_role"}
+	for _, item := range array {
+		dicts := strings.Split(item, "_")
+		entityName := ""
+		entityPath := ""
+		if len(dicts) == 2 {
+			entityName = strings.ToUpper(dicts[0][:1]) + dicts[0][1:] + strings.ToUpper(dicts[1][:1]) + dicts[1][1:]
+			entityPath = dicts[0] + dicts[1]
+		} else if len(dicts) == 3 {
+			entityName = strings.ToUpper(dicts[0][:1]) + dicts[0][1:] + strings.ToUpper(dicts[1][:1]) + dicts[1][1:] + strings.ToUpper(dicts[2][:1]) + dicts[2][1:]
+			entityPath = dicts[0] + dicts[1] + dicts[2]
 		}
-		//fmt.Print(string(data))
-
-		content := strings.Replace(string(data), "{entityName}", "SysDict", -1)
-		content = strings.Replace(content, "{entityPath}", "sysDict", -1)
-		fmt.Print(content)
-
-		outFilePath := base.GetProjectPath() + "/internal/api/sys_dict.go"
-		err = ioutil.WriteFile(outFilePath, []byte(content), 0777)
-		if err != nil {
-			fmt.Println(err)
-		}
-	})
+		fileName := item
+		GenerateApi(entityName, entityPath, fileName)
+		GenerateLogic(entityName, entityPath, fileName)
+		GenerateController(entityName, fileName)
+	}
 }
 
-func TestGenLogic(t *testing.T) {
-	gtest.C(t, func(t *gtest.T) {
-		inFilePath := base.GetProjectPath() + "/manifest/generate/logic.txt"
-		data, err := ioutil.ReadFile(inFilePath)
-		if err != nil {
-			fmt.Println(err)
-		}
-		//fmt.Print(string(data))
+func GenerateApi(entityName string, entityPath string, fileName string) {
+	inFilePath := base.GetProjectPath() + "/manifest/generate/api.txt"
+	data, err := ioutil.ReadFile(inFilePath)
+	if err != nil {
+		fmt.Println(err)
+	}
+	//fmt.Print(string(data))
 
-		content := strings.Replace(string(data), "{entityName}", "SysDict", -1)
-		content = strings.Replace(content, "{entityPath}", "sysDict", -1)
-		fmt.Print(content)
+	content := strings.Replace(string(data), "{entityName}", entityName, -1)
+	content = strings.Replace(content, "{entityPath}", entityPath, -1)
+	fmt.Print(content)
 
-		outFilePath := base.GetProjectPath() + "/internal/logic/sys/sys_dict.go"
-		err = ioutil.WriteFile(outFilePath, []byte(content), 0777)
-		if err != nil {
-			fmt.Println(err)
-		}
-	})
+	outFilePath := base.GetProjectPath() + "/internal/api/" + fileName + ".go"
+	err = ioutil.WriteFile(outFilePath, []byte(content), 0777)
+	if err != nil {
+		fmt.Println(err)
+	}
 }
 
-func TestGenController(t *testing.T) {
-	gtest.C(t, func(t *gtest.T) {
-		inFilePath := base.GetProjectPath() + "/manifest/generate/controller.txt"
-		data, err := ioutil.ReadFile(inFilePath)
-		if err != nil {
-			fmt.Println(err)
-		}
-		//fmt.Print(string(data))
+func GenerateLogic(entityName string, entityPath string, fileName string) {
+	inFilePath := base.GetProjectPath() + "/manifest/generate/logic.txt"
+	data, err := ioutil.ReadFile(inFilePath)
+	if err != nil {
+		fmt.Println(err)
+	}
+	//fmt.Print(string(data))
 
-		content := strings.Replace(string(data), "{entityName}", "SysDict", -1)
-		fmt.Print(content)
+	content := strings.Replace(string(data), "{entityName}", entityName, -1)
+	content = strings.Replace(content, "{entityPath}", entityPath, -1)
+	fmt.Print(content)
 
-		outFilePath := base.GetProjectPath() + "/internal/controller/sys_dict.go"
-		err = ioutil.WriteFile(outFilePath, []byte(content), 0777)
-		if err != nil {
-			fmt.Println(err)
-		}
-	})
+	outFilePath := base.GetProjectPath() + "/internal/logic/sys/" + fileName + ".go"
+	err = ioutil.WriteFile(outFilePath, []byte(content), 0777)
+	if err != nil {
+		fmt.Println(err)
+	}
+}
+
+func GenerateController(entityName string, fileName string) {
+	inFilePath := base.GetProjectPath() + "/manifest/generate/controller.txt"
+	data, err := ioutil.ReadFile(inFilePath)
+	if err != nil {
+		fmt.Println(err)
+	}
+	//fmt.Print(string(data))
+
+	content := strings.Replace(string(data), "{entityName}", entityName, -1)
+	fmt.Print(content)
+
+	outFilePath := base.GetProjectPath() + "/internal/controller/" + fileName + ".go"
+	err = ioutil.WriteFile(outFilePath, []byte(content), 0777)
+	if err != nil {
+		fmt.Println(err)
+	}
 }

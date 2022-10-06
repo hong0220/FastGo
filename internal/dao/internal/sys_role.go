@@ -11,74 +11,72 @@ import (
 	"github.com/gogf/gf/v2/frame/g"
 )
 
-// SysDictDao is the data access object for table sys_dict.
-type SysDictDao struct {
+// SysRoleDao is the data access object for table sys_role.
+type SysRoleDao struct {
 	table   string         // table is the underlying table name of the DAO.
 	group   string         // group is the database configuration group name of current DAO.
-	columns SysDictColumns // columns contains all the column names of Table for convenient usage.
+	columns SysRoleColumns // columns contains all the column names of Table for convenient usage.
 }
 
-// SysDictColumns defines and stores column names for table sys_dict.
-type SysDictColumns struct {
+// SysRoleColumns defines and stores column names for table sys_role.
+type SysRoleColumns struct {
 	Id         string // 编号
-	Label      string // 标签名
-	Value      string // 数据值
-	Type       string // 类型
-	Desc       string // 描述
+	OfficeId   string // 归属机构
+	Name       string // 角色名称
+	DataScope  string // 数据范围
 	CreateBy   string // 创建者
 	CreateDate string // 创建时间
 	UpdateBy   string // 更新者
 	UpdateDate string // 更新时间
-	Remark     string // 备注
-	Status     string // 状态,0:删除,1:有效
+	Remarks    string // 备注信息
+	DelFlag    string // 删除标记
 }
 
-//  sysDictColumns holds the columns for table sys_dict.
-var sysDictColumns = SysDictColumns{
+//  sysRoleColumns holds the columns for table sys_role.
+var sysRoleColumns = SysRoleColumns{
 	Id:         "id",
-	Label:      "label",
-	Value:      "value",
-	Type:       "type",
-	Desc:       "desc",
+	OfficeId:   "office_id",
+	Name:       "name",
+	DataScope:  "data_scope",
 	CreateBy:   "create_by",
 	CreateDate: "create_date",
 	UpdateBy:   "update_by",
 	UpdateDate: "update_date",
-	Remark:     "remark",
-	Status:     "status",
+	Remarks:    "remarks",
+	DelFlag:    "del_flag",
 }
 
-// NewSysDictDao creates and returns a new DAO object for table data access.
-func NewSysDictDao() *SysDictDao {
-	return &SysDictDao{
+// NewSysRoleDao creates and returns a new DAO object for table data access.
+func NewSysRoleDao() *SysRoleDao {
+	return &SysRoleDao{
 		group:   "default",
-		table:   "sys_dict",
-		columns: sysDictColumns,
+		table:   "sys_role",
+		columns: sysRoleColumns,
 	}
 }
 
 // DB retrieves and returns the underlying raw database management object of current DAO.
-func (dao *SysDictDao) DB() gdb.DB {
+func (dao *SysRoleDao) DB() gdb.DB {
 	return g.DB(dao.group)
 }
 
 // Table returns the table name of current dao.
-func (dao *SysDictDao) Table() string {
+func (dao *SysRoleDao) Table() string {
 	return dao.table
 }
 
 // Columns returns all column names of current dao.
-func (dao *SysDictDao) Columns() SysDictColumns {
+func (dao *SysRoleDao) Columns() SysRoleColumns {
 	return dao.columns
 }
 
 // Group returns the configuration group name of database of current dao.
-func (dao *SysDictDao) Group() string {
+func (dao *SysRoleDao) Group() string {
 	return dao.group
 }
 
 // Ctx creates and returns the Model for current DAO, It automatically sets the context for current operation.
-func (dao *SysDictDao) Ctx(ctx context.Context) *gdb.Model {
+func (dao *SysRoleDao) Ctx(ctx context.Context) *gdb.Model {
 	return dao.DB().Model(dao.table).Safe().Ctx(ctx)
 }
 
@@ -88,6 +86,6 @@ func (dao *SysDictDao) Ctx(ctx context.Context) *gdb.Model {
 //
 // Note that, you should not Commit or Rollback the transaction in function f
 // as it is automatically handled by this function.
-func (dao *SysDictDao) Transaction(ctx context.Context, f func(ctx context.Context, tx *gdb.TX) error) (err error) {
+func (dao *SysRoleDao) Transaction(ctx context.Context, f func(ctx context.Context, tx *gdb.TX) error) (err error) {
 	return dao.Ctx(ctx).Transaction(ctx, f)
 }
