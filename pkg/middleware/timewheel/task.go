@@ -4,7 +4,7 @@ import (
 	"time"
 )
 
-// Task 时间轮上需要执行的任务
+// Task 时间轮上执行的任务
 type Task struct {
 	// 对象标识，唯一值
 	key interface{}

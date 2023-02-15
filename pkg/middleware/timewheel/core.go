@@ -76,7 +76,10 @@ func (timeWheel *TimeWheel) start() {
 			timeWheel.addTask(task, false)
 
 		case task := <-timeWheel.removeTaskChannel:
-			timeWheel.removeTask(task)
+			err := timeWheel.removeTask(task)
+			if err != nil {
+				return
+			}
 
 		case <-timeWheel.stopChannel:
 			timeWheel.ticker.Stop()
@@ -111,11 +114,11 @@ func (timeWheel *TimeWheel) rollAndRunTask() {
 
 			// 执行任务时，Task.job 是第一优先级，然后是 TimeWheel.job
 			if task.job != nil {
-				go task.job(task.key)
+				go task.job(task.key, task.jobContext)
 			} else if timeWheel.job != nil {
-				go timeWheel.job(task.key)
+				go timeWheel.job(task.key, task.jobContext)
 			} else {
-				fmt.Println(fmt.Sprintf("The task %d don't have job to run", task.key))
+				fmt.Printf("%s\n", fmt.Sprintf("The task %d don't have job to run", task.key))
 			}
 
 			// 临时存储
@@ -129,8 +132,8 @@ func (timeWheel *TimeWheel) rollAndRunTask() {
 			// 遍历下一个 Task
 			item = next
 
-			// 重新添加任务到时间轮
-			if task.times != 0 {
+			// 如果 times == 0，说明已经完成执行周期，不需要再添加任务回时间轮
+			if task.times != 0 { // 重新添加任务到时间轮
 				// -1表示一直执行
 				if task.times < 0 {
 					timeWheel.addTask(task, true)
@@ -138,8 +141,6 @@ func (timeWheel *TimeWheel) rollAndRunTask() {
 					task.times--
 					timeWheel.addTask(task, true)
 				}
-			} else {
-				// 如果 times == 0，说明已经完成执行周期，不需要再添加任务回时间轮
 			}
 		}
 	}
@@ -164,30 +165,52 @@ func (timeWheel *TimeWheel) IsRunning() bool {
 }
 
 // AddTask 时间轮添加任务
-// @param executeCycle    任务周期
+// @param interval    任务周期
 // @param key         任务key，必须是唯一，否则添加任务会失败
 // @param createTime  任务创建时间
-func (timeWheel *TimeWheel) AddTask(interval time.Duration, key interface{}, createdTime time.Time, times int, job Job, jobContext JobContext) error {
+func (timeWheel *TimeWheel) AddTask(interval time.Duration, key interface{}, createdTime time.Time, times int, job Job,
+	jobContext JobContext) error {
 	if interval <= 0 || key == nil {
 		return errors.New("invalid task params")
 	}
 
 	// 检查 Task.Key 是否重复
-	_, ok := timeWheel.taskRecords.Load(key)
-	if ok {
-		return ErrDuplicateTaskKey
-	}
+	val, ok := timeWheel.taskRecords.Load(key)
 
-	timeWheel.addTaskChannel <- &Task{
-		key:          key,
-		executeCycle: interval,
-		createdTime:  createdTime,
-		times:        times,
-		job:          job,
-		jobContext:   jobContext,
-	}
+	if ok { // Task.Key 重复
+		duplicateTask := val.(*list.Element).Value.(*Task)
+		if (duplicateTask.executeCycle)*time.Second == interval { // 告警策略执行周期不变
+			// 认为 Task.Key 重复
+			return ErrDuplicateTaskKey
+		} else { // 告警策略执行周期变化
+			// task 先移除，再添加 task
+			err := timeWheel.RemoveTask(duplicateTask.key)
+			if err != nil {
+				return err
+			}
 
-	return nil
+			timeWheel.addTaskChannel <- &Task{
+				key:          key,
+				executeCycle: interval,
+				createdTime:  createdTime,
+				times:        times,
+				job:          job,
+				jobContext:   jobContext,
+			}
+			return nil
+		}
+	} else { // Task.Key 不重复
+		// 添加 task
+		timeWheel.addTaskChannel <- &Task{
+			key:          key,
+			executeCycle: interval,
+			createdTime:  createdTime,
+			times:        times,
+			job:          job,
+			jobContext:   jobContext,
+		}
+		return nil
+	}
 }
 
 // 添加任务
